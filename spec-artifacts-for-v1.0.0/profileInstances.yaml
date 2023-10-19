@@ -1,0 +1,22 @@
+
+  - profile-name: 'FileProfile'
+    uuid: 'aips-0-0-5-file-p-000'
+    capability:
+      file-identifier: 'staticListFile'
+      file-description: 'staticLinkList'
+    configuration:
+      file-path: '../application-data/application-data.json'
+      user-name: 'AirInterfacePowerSaver'
+      password: 'Operations to add password'
+      operation: 'write'
+
+  - profile-name: 'FileProfile'
+    uuid: 'aips-0-0-5-file-p-001'
+    capability:
+      file-identifier: 'blackListFile'
+      file-description: 'blackLinkList'
+    configuration:
+      file-path: '../application-data/application-data.json'
+      user-name: 'AirInterfacePowerSaver'
+      password: 'Operations to add password'
+      operation: 'write'

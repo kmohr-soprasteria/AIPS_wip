@@ -1,0 +1,117 @@
+servers:
+
+  operation-servers:
+      individual:
+        ## 01 Automation management ------------------------------------------------------------ 
+        ## StaticListAutomationManagement
+        - operation-name: /v1/add-links-to-static-list
+          uuid: aips-1-0-0-op-s-is-100
+        - operation-name: /v1/assign-automation-to-links
+          uuid: aips-1-0-0-op-s-is-101
+        - operation-name: /v1/remove-links-from-static-list
+          uuid: aips-1-0-0-op-s-is-102
+        - operation-name: /v1/unassign-automation-from-links
+          uuid: aips-1-0-0-op-s-is-103
+        - operation-name: /v1/unassign-all-automations-from-links
+          uuid: aips-1-0-0-op-s-is-104
+        - operation-name: /v1/unassign-automation-from-all-links
+          uuid: aips-1-0-0-op-s-is-105
+        - operation-name: /v1/list-links
+          uuid: aips-1-0-0-op-s-is-106
+        - operation-name: /v1/list-automation-names
+          uuid: aips-1-0-0-op-s-is-107
+        - operation-name: /v1/list-assignments-for-specific-link
+          uuid: aips-1-0-0-op-s-is-108
+        - operation-name: /v1/list-links-with-specific-number-of-assignments
+          uuid: aips-1-0-0-op-s-is-109
+        - operation-name: /v1/list-links-with-specific-automation-assigned
+          uuid: aips-1-0-0-op-s-is-110
+
+        ## BlackListManagement
+        - operation-name: /v1/add-links-to-black-list
+          uuid: aips-1-0-0-op-s-is-120
+        - operation-name: /v1/remove-links-from-black-list
+          uuid: aips-1-0-0-op-s-is-121
+        - operation-name: /v1/list-links-in-black-list
+          uuid: aips-1-0-0-op-s-is-122
+        - operation-name: /v1/is-link-barred
+          uuid: aips-1-0-0-op-s-is-123
+
+        ## Visualization of automation management: out of scope for v1.0.0
+
+        ## 02 Link group related management ----------------------------------------------------
+        ## TimeBasedPowerSaving
+        - operation-name: /v1/add-start-trigger
+          uuid: aips-1-0-0-op-s-is-200
+        - operation-name: /v1/add-end-trigger
+          uuid: aips-1-0-0-op-s-is-201
+        - operation-name: /v1/remove-start-trigger
+          uuid: aips-1-0-0-op-s-is-202
+        - operation-name: /v1/remove-end-trigger
+          uuid: aips-1-0-0-op-s-is-203
+        - operation-name: /v1/remove-all-triggers
+          uuid: aips-1-0-0-op-s-is-204
+        - operation-name: /v1/list-all-triggers
+          uuid: aips-1-0-0-op-s-is-205
+        - operation-name: /v1/start-time-based-power-saving
+          uuid: aips-1-0-0-op-s-is-210
+        - operation-name: /v1/end-time-based-power-saving
+          uuid: aips-1-0-0-op-s-is-211
+
+        ## 03 Link related automation: ---------------------------------------------------------
+        ## DroppedFramesInitiatedRestoration
+        - operation-name: /v1/start-dropped-frames-monitoring
+          uuid: aips-1-0-0-op-s-is-300
+        - operation-name: /v1/stop-dropped-frames-monitoring
+          uuid: aips-1-0-0-op-s-is-301
+
+        ## 04: Link group related switching operation ------------------------------------------
+        ## SimpleActivation
+        - operation-name: /v1/add-links-to-power-saving-activation-queue
+          uuid: aips-1-0-0-op-s-is-400
+        - operation-name: /v1/remove-links-from-power-saving-activation-queue
+          uuid: aips-1-0-0-op-s-is-401
+        - operation-name: /v1/purge-power-saving-activation-queue
+          uuid: aips-1-0-0-op-s-is-402
+
+        ## PersistentDeactivation
+        - operation-name: /v1/add-links-to-power-saving-deactivation-queue
+          uuid: aips-1-0-0-op-s-is-410
+        - operation-name: /v1/purge-power-saving-deactivation-queue
+          uuid: aips-1-0-0-op-s-is-411
+
+        ## 05: Link related switching operation ------------------------------------------------
+        ## RedundantTransmittersOff
+        - operation-name: /v1/switch-redundant-transmitter-pair-off
+          uuid: aips-1-0-0-op-s-is-500
+
+        ## AllTransmittersOn
+        - operation-name: /v1/reactivate-transmitters-of-link
+          uuid: aips-1-0-0-op-s-is-510
+
+        ## 06: Link analysis -------------------------------------------------------------------
+        ## BasicLinkAnalysis
+        - operation-name: /v1/provide-transmitter-status-of-parallel-links
+          uuid: aips-1-0-0-op-s-is-600
+
+        ## 07: Power saving status -------------------------------------------------------------
+        ## BasicPowerSavingStatus
+        - operation-name: /v1/record-power-saving-status
+          uuid: aips-1-0-0-op-s-is-700
+        - operation-name: /v1/list-power-saving-status
+          uuid: aips-1-0-0-op-s-is-701
+        - operation-name: /v1/provide-power-saving-status-of-link
+          uuid: aips-1-0-0-op-s-is-702
+        - operation-name: /v1/list-affected-links
+          uuid: aips-1-0-0-op-s-is-703
+        - operation-name: /v1/list-to-be-restored-links
+          uuid: aips-1-0-0-op-s-is-704
+        - operation-name: /v1/delete-link-from-power-saving-table
+          uuid: aips-1-0-0-op-s-is-705
+
+        ## 08: Logging of power saving ---------------------------------------------------------
+        ## may be added to v1.0.0 if time allows it
+
+        ## other module types of of scope for v1.0.0
+        ## 09: Performance of power savings
+        ## 10: Alarm management of power savings
