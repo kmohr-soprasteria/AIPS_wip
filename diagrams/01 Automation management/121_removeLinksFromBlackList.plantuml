@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForRemovingLinksFromBlackListCausesListUpdate
+RequestForRemovingLinksFromBlackListCausesFileUpdate
 end title
 
 participant "external" as requestor

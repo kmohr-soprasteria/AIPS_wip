@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForAssigningAutomationToLinksCausesListUpdate
+RequestForAssigningAutomationToLinksCausesFileUpdate
 end title
 
 participant "external" as requestor
@@ -17,6 +17,7 @@ note over assignAutomation
 end note
 requestor -> assignAutomation: {automationName, linkIdList}
 activate assignAutomation
+assignAutomation --> requestor
 
 deactivate assignAutomation
 

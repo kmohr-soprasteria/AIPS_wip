@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForAddingLinksToBlackListCausesBlackListUpdateAndPersistentDeactivation
+RequestForAddingLinksToBlackListCausesFileUpdateAndPersistentDeactivation
 end title
 
 participant "external" as requestor

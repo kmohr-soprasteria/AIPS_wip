@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForRemovingLinksFromStaticListCausesListUpdateAndPersistentDeactivation
+RequestForRemovingLinksFromStaticListCausesFileUpdateAndPersistentDeactivation
 end title
 
 participant "external" as requestor

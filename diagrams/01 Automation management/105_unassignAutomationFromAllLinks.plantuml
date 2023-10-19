@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForUnassigningAutomationFromAllLinksCausesListUpdateAndPersistentDeactivation
+RequestForUnassigningAutomationFromAllLinksCausesFileUpdateAndPersistentDeactivation
 end title
 
 participant "external" as requestor

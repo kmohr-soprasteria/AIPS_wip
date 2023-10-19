@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForAddingLinksToStaticListCausesListUpdate
+RequestForAddingLinksToStaticListCausesFileUpdate
 end title
 
 participant "external" as requestor
@@ -16,6 +16,7 @@ note over addLinks
 end note
 requestor -> addLinks: {linkIdList}
 activate addLinks
+addLinks --> requestor
 
 deactivate addLinks
 
