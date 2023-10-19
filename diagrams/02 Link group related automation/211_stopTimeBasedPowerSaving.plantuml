@@ -36,6 +36,14 @@ note over stopPsModule
 end note
 stopPsModule -> startPersistentDeactivation: {linkdIdList, automationName="TimeBasedPowerSaving", switchingOperationName="PersistentDeactivation"}
 
+
+note over stopPsModule #pink
+  - der automationName könnte von Links in der Zwischenzeit gelöscht worden sein,
+    falls die initiierte PersistentDeactivation nicht geklappt hat, würde die hier nicht nochmal ausgeführt
+  - im statusTable steht das aber noch drin; man könnte hier zwar auch den statusTable zusätzlich abfragen
+  - aber das reconciliationModul kann in diesem Fall den Zustand bereinigen
+end note
+
 deactivate stopPsModule
 
 @enduml

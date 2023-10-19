@@ -10,6 +10,7 @@ participant "AIPS://v1/add-start-trigger" as addTrigger
 
 requestor -> addTrigger: {time}
 activate addTrigger
+addTrigger --> requestor
 
 deactivate addTrigger
 

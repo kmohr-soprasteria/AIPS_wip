@@ -10,6 +10,7 @@ participant "AIPS://v1/remove-end-trigger" as removeTrigger
 
 requestor -> removeTrigger: {time}
 activate removeTrigger
+removeTrigger --> requestor
 
 deactivate removeTrigger
 

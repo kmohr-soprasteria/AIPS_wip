@@ -2,14 +2,16 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForPurgingPowerSavingActivationQueueCausesQueuePurge
+RequestForPurgingPowerSavingActivationQueueCausesActivationQueuePurge
 end title
 
 participant "external" as requestor
 participant "AIPS://v1/purge-power-saving-activation-queue" as purgeQueue
+participant "ElasticSearch" as es
 
 requestor -> purgeQueue
 activate purgeQueue
+purgeQueue -> es
 
 deactivate purgeQueue
 

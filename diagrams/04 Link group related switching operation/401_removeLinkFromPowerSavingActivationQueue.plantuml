@@ -2,14 +2,16 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForRemovingLinkFromPowerSavingActivationQueueCausesQueueUpdate
+RequestForRemovingLinkFromPowerSavingActivationQueueCausesActivationQueueUpdate
 end title
 
 participant "external" as requestor
 participant "AIPS://v1/remove-links-from-power-saving-actication-queue" as removeFromQueue
+participant "ElasticSearch" as es
 
 requestor -> removeFromQueue: {linkId, automationName}
 activate removeFromQueue
+removeFromQueue -> es: {linkId, automationName}
 
 deactivate removeFromQueue
 

@@ -10,6 +10,7 @@ participant "AIPS://v1/remove-all-Triggers" as removeTrigger
 
 requestor -> removeTrigger
 activate removeTrigger
+removeTrigger --> requestor
 
 deactivate removeTrigger
 

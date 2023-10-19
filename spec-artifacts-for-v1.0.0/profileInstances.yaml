@@ -20,3 +20,13 @@
       user-name: 'AirInterfacePowerSaver'
       password: 'Operations to add password'
       operation: 'write'
+
+
+## profile instances for 
+## - timeBasePowerSaving
+##   - start/end triggers
+##   - ggf. Offset zw. Aktivierung/Deaktivierung (Toggle vermeiden)
+##   - oder max. Dauer der Abschaltung wäre auch mgl, um zu verhindern, dass 
+##     - ein Vergessen eines Endtriggers keine Probleme verursacht
+##     - wenn was schief geht, automatisch ein Rollback nach einer gewissen Zeit erfolgt (s. auch Maintenance-Window-Config auf Gerät)
+## - persistentDeactivation: maximumRuntime

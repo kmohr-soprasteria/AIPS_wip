@@ -1,0 +1,69 @@
+@startuml 4xx_cyclicOperationOnPowerSavingActivationQueue
+skinparam responseMessageBelowArrow true
+
+title
+PromptForEmbeddingCausesCyclicOperationOnPowerSavingActivationQueue
+end title
+
+participant "RO" as ro
+participant "AIPS://v1/embed-yourself" as embedYourself
+participant "ElasticSearch" as es
+participant "AIPS://v1/is-link-barred" as isLinkBarred
+participant "AIPS://v1/switch-redundant-transmitter-pair-off" as redundantTransmittersOff
+participant "AIPS://v1/remove-links-from-power-saving-activation-queue" as removeFromQueue
+
+ro -> embedYourself
+activate embedYourself
+
+'cyclic operation starts
+note over embedYourself
+  CyclicOperation for power saving activation queue
+  (from SimpleActivation module) starts
+
+  - queue records have the following columns:
+    linkId, automationName, switchingOperationName
+  - records are NOT unique
+  - queue is processed sequentially
+end note
+
+'get activationQueue
+note over embedYourself
+  <u>GetNextActivationQueueEntry</u>
+end note
+embedYourself -> es
+es --> embedYourself: {linkId, automationName, switchingOperationName}
+
+'iterate over queue
+note over embedYourself
+  FOR linkId from <i>GetActivationQueue</i>
+    <u>BlackListCheck</u>
+end note
+embedYourself -> isLinkBarred: {linkId}
+isLinkBarred --> embedYourself: {boolean}
+
+'if link is on blackList remove entry from queue, automationName irrelevant here
+note over embedYourself
+  IF (linkId is barred==true)
+  THEN <u>DeleteFromActivationQueue</u>
+end note
+embedYourself -> es: {linkId, automationName, switchingOperationName}
+es --> embedYourself
+
+'if link is not in blackList
+note over embedYourself
+  IF (linkId is barred==false)
+  THEN <u>SwitchRedundantTransmitterOff</u>
+end note
+embedYourself -> redundantTransmittersOff: {linkId, automationName}
+redundantTransmittersOff --> embedYourself: {responseCode}
+
+'remove record from queue (no retries)
+note over embedYourself
+  IF (responseCode <i>SwitchRedundantTransmitterOff</i> == 200)
+  THEN <u>RemoveRecordFromActivationQueue</u>
+end note
+embedYourself -> removeFromQueue: {linkId, automationName}
+
+deactivate embedYourself
+
+@enduml

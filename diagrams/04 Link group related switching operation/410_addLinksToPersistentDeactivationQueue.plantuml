@@ -2,14 +2,18 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForAddingLinksToPowerSavingDeactivationQueueCausesQueueUpdate
+RequestForAddingLinksToPowerSavingDeactivationQueueCausesDeactivationQueueUpdate
 end title
 
 participant "external" as requestor
 participant "AIPS://v1/add-links-to-power-saving-deactivation-queue" as addLinks
+participant "ElasticSearch" as es
 
 requestor -> addLinks: {linkIdList, automationName, switchingOperationName}
 activate addLinks
+
+addLinks -> es:  {linkIdList, automationName, switchingOperationName}
+
 deactivate addLinks
 
 @enduml

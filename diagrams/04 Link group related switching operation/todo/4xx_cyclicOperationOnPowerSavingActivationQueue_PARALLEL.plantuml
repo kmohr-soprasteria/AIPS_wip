@@ -7,12 +7,13 @@ end title
 
 participant "RO" as ro
 participant "AIPS://v1/embed-yourself" as embedYourself
-participant "AIPS://v1/add-links-to-power-saving-activation-queue" as addLinks
+participant "ElasticSearch" as es
 participant "AIPS://v1/is-link-barred" as isLinkBarred
 participant "AIPS://v1/switch-redundant-transmitter-pair-off" as redundantTransmittersOff
 participant "AIPS://v1/remove-links-from-power-saving-activation-queue" as removeFromQueue
 
 ro -> embedYourself
+activate embedYourself
 
 'cyclic operation starts
 note over embedYourself
@@ -24,9 +25,23 @@ note over embedYourself
   - records are NOT unique
 end note
 
+note over embedYourself #Pink
+  we might apply a sliding window where we always
+  read the next x number of queue records
+  and process them at once
+  (sliding window)
+end note
+
+'get activationQueue
+note over embedYourself
+  <u>GetActivationQueueRecords</u>
+end note
+embedYourself -> es: {<i>numberOfRecords_from_integerProfile</i>}
+es --> embedYourself: {list-of(linkId, automationName, switchingOperationName)}
+
 'iterate over queue
 note over embedYourself
-  FOR each linkId in queue records
+  FOR each unique linkId from <i>GetActivationQueue</i>
     <u>BlackListCheck</u>
 end note
 embedYourself -> isLinkBarred: {linkId}
@@ -34,26 +49,36 @@ isLinkBarred --> embedYourself: {boolean}
 
 'if link is on blackList remove entry from queue, automationName irrelevant here
 note over embedYourself
-  FOR each queue record
+  FOR each linkId from <i>GetActivationQueue</i>
     IF (linkId is barred==true)
-    THEN remove record from queue
+    THEN <u>DeleteFromActivationQueue</u>
 end note
+note over es
+  delete all entries for that linkId
+  from activationQueue
+end note
+embedYourself -> es: {linkId}
+es --> embedYourself
 
 'if link is not in blackList
 note over embedYourself
-  FOR each record still in queue
+  FOR each queue record from <i>GetActivationQueue</i>
+    where (linkId is barred==false)
     get pair (linkId, automationName)
-    <u>SwitchRedundantTransmitterOff</u>
+    THEN <u>SwitchRedundantTransmitterOff</u>
 end note
 embedYourself -> redundantTransmittersOff: {linkId, automationName}
+redundantTransmittersOff --> embedYourself: {responseCode}
 
 'remove record from queue (no retries)
 note over embedYourself
-  FOR each record from previous step
-    <u>RemoveRecordFromActivationQueue</u>
+  FOR each (linkId, automationName)-pair
+    from <i>SwitchRedundantTransmitterOff</i>
+    where (responseCode == 200)
+      <u>RemoveRecordFromActivationQueue</u>
 end note
 embedYourself -> removeFromQueue: {linkId, automationName}
 
-deactivate addLinks
+deactivate embedYourself
 
 @enduml
