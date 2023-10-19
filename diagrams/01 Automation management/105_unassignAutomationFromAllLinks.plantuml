@@ -28,8 +28,9 @@ listLinks --> unassignAutomation: {linkIdList}
 'update staticList by removing automationName assignment for all links
 note over unassignAutomation
   remove automationName from assignmentList
-  of all linkIds in staticList
+  of all linkIds in staticList file
 end note
+unassignAutomation --> requestor: "<i>assignments removed</i>"
 
 'stop ongoing/planned power saving
 note over unassignAutomation
@@ -42,7 +43,8 @@ stopSimpleActivation --> unassignAutomation
 
 'initiate persistentDeactivation to turn power saving off
 note over unassignAutomation
-  <u>AddTo<b>Deactivation</b>Queue</u>
+  FOR complete linkIdList
+    <u>AddTo<b>Deactivation</b>Queue</u>
 end note
 unassignAutomation -> startPersistentDeactivation: {linkIdList, automationName, switchingOperationName="PersistentDeactivation"}
 

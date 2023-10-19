@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForListingAssignmentsOfSpecificLinkCausesListing
+RequestForListingAssignmentsOfSpecificLinkCausesFileReading
 end title
 
 participant "external" as requestor

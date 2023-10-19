@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForCheckingLinkBarringStatusCausesStatusListing
+RequestForCheckingLinkBarringStatusCausesFileReading
 end title
 
 participant "external" as requestor

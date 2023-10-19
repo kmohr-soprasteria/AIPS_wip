@@ -32,13 +32,19 @@ listLinks --> removeLinks: {list-of-(linkId,automationNamesList)}
 
 'update staticList by deleting the linkIdList links
 note over removeLinks
-  delete the linkIds of linkIdList
-  from staticList
+  delete the linkIds of linkIdList from staticList
+
+  <i>note: the linkId is removed immediately (after capturing the </i>
+  <i>current state) regardless of whether the deactivation of powerSaving </i>
+  <i>mode succeeds or not. </i>
+  <i>The deactivation of powerSaving mode is <b>just</b> triggered here, </i>
+  <i>in case of failure, the reconcilation module needs to take over. </i>
 end note
+removeLinks --> requestor: "<i>linkIds removed</i>"
 
 'stop ongoing/planned power saving
 note over removeLinks
-  FOR each linkId from linkIdList
+  FOR each linkId from linkIdList file
     FOR each automationName from linkId.automationNamesList
         build pair (linkId, automationName),
         <u>RemoveFrom<b>Activation</b>Queue</u>
@@ -49,26 +55,10 @@ stopSimpleActivation --> removeLinks
 'initiate persistentDeactivation to turn power saving off
 note over removeLinks
   FOR each pair (linkId, automationName)
-  from previous step
-  <u>AddTo<b>Deactivation</b>Queue</u>
+    from <i>RemoveFromActivationQueue</i>
+    <u>AddTo<b>Deactivation</b>Queue</u>
 end note
 removeLinks -> startPersistentDeactivation: {linkId, automationName, switchingOperationName="PersistentDeactivation"}
-
-
-note over removeLinks #pink
-  ggf. darf man den Link aus der staticList erst dann löschen,
-  wenn der auch wieder erfolgreich aktiviert wurde
-  aber: man kann ihn ggf. als Löschkandidaten markieren
-  (d.h. auch alle automationNames rauswerfen)
-  Sobald er wieder richtig läuft kann der Link dann gelöscht werden, 
-  das würde auch sicherstellen, dass es keine Inkonsistenzen mit dem 
-  StatusTable gibt (in dem muss der Link auf jeden Fall drin stehen bleiben, 
-  bis modulesToRestore leer ist)
-
-  nur automation löschen ist nicht kritisch, weil da beim sync von
-  statusTable & staticList keine Löschkandidaten für den statusTable
-  identifiziert werden.
-end note
 
 deactivate removeLinks
 

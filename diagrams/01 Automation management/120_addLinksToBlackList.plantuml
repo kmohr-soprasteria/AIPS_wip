@@ -37,6 +37,7 @@ note over addLinks
   Add linkIds from linkIdList to blackList
   (if not yet included)
 end note
+addLinks --> requestor: "<i>linkIds added</i>"
 
 'stop ongoing/planned power saving
 note over addLinks
@@ -52,8 +53,8 @@ stopSimpleActivation --> addLinks
 'initiate persistentDeactivation to turn power saving off
 note over addLinks
   FOR each pair (linkId, automationName)
-  from previous step
-  <u>AddTo<b>Deactivation</b>Queue</u>
+    from <i>RemoveFromActivationQueue</i>
+    <u>AddTo<b>Deactivation</b>Queue</u>
 end note
 addLinks -> startPersistentDeactivation: {linkId, automationName, switchingOperationName="PersistentDeactivation"}
 

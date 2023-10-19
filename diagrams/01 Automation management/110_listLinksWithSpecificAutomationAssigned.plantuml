@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForListingLinksWithSpecificAutomationAssignedCausesListing
+RequestForListingLinksWithSpecificAutomationAssignedCausesFileReading
 end title
 
 participant "external" as requestor
@@ -13,8 +13,8 @@ requestor -> listLinks: {automationName}
 activate listLinks
 
 note over listLinks
-  filter for linkIds with automationName
-  in linkId.(assignedAutomationNamesList)
+  filter for linkIds where 
+    (automationName in linkId.automationNamesList)
 end note
 
 listLinks --> requestor: {linkIdList}

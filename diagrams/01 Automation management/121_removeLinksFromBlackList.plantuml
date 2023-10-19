@@ -16,6 +16,8 @@ end note
 
 requestor -> removeLinks: {linkIdList}
 activate removeLinks
+removeLinks --> requestor
+
 deactivate removeLinks
 
 @enduml

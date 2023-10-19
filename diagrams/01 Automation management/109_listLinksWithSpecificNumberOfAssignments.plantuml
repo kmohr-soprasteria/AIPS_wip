@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForListingLinksWithSpecificNumberOfAssignmentsCausesListing
+RequestForListingLinksWithSpecificNumberOfAssignmentsCausesFileReading
 end title
 
 participant "external" as requestor
@@ -13,7 +13,7 @@ activate listLinks
 
 note over listLinks
   filter for linkIds where
-  (assignedAutomationNamesList.size()==integerNumber)
+    (linkId.automationNamesList.size()==integerNumber)
 end note
 
 listLinks --> requestor: {linkIdList}

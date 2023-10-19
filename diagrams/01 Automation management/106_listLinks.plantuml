@@ -2,7 +2,7 @@
 skinparam responseMessageBelowArrow true
 
 title
-RequestForListingLinksInStaticListCausesListing
+RequestForListingLinksInStaticListCausesFileReading
 end title
 
 participant "external" as requestor
@@ -12,12 +12,12 @@ requestor -> listLinks: <i>optional:</i> {linkIdList}
 activate listLinks
 
 note over listLinks
-  - if requestor provided linkIdList filter
-    the data from the file for those linkIds from this
+  - if requestor provided linkIdList filter the data 
+    from the file for those linkIds included in the
     linkIdList,
   - else return complete staticList
 end note
-listLinks --> requestor: {list-of-(linkId, assignedAutomationsList)}
+listLinks --> requestor: {list-of-(linkId, automationNamesList)}
 
 deactivate listLinks
 
